@@ -34,4 +34,14 @@ function showHello(){
 $("#buttonWhatsUp").click(function() {
     var dt = new Date();
     alert(dt.toString());
+
+    $(this).css("background-color","red")
+})
+
+$("button").mouseover( function(){
+    $(this).css("background-color","blue")
+})
+
+$("button").mouseout( function(){
+    $(this).css("background-color","green")
 })
