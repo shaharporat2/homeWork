@@ -38,8 +38,7 @@ Immediately Invoked Function Expression IIFE
 "use strict";
 
 (function (){ //start IIFE
-    let num = prompt("Please enter number");
-    alert(Math.pow(num, 2));
+
 })() //End IIFE
 
 $(function(){
@@ -48,6 +47,17 @@ $(function(){
     console.log(a);
     var a = "111";
     console.log(a);
+
+    const buttonHello = document.getElementById("btn4");
+    buttonHello.addEventListener("click",function(){
+    //const num = parseInt(prompt("Please enter number"));
+    //const num = parseFloat(prompt("Please enter number"));
+    //const num = Number(prompt("Please enter number"));
+    const num = +(prompt("Please enter number"));
+    alert(Math.pow(num, 2));
+    });
+
+ 
 })
 
 
