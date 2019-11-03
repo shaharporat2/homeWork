@@ -32,10 +32,31 @@ Immediately Invoked Function Expression IIFE
 "use strict" - Set JavaScript -  find all kinds of Bugs in javaScript 
 
 
+Inline function           Arrow function
+
+function () { .... } --- () => {....}
+
+function (a) { .... } --- a => {....}
+
+function (a,b,c) { .... } --- (a,b,c) => { .... }
+
+function () { One command } --- () => One command
+
+function () { return value} --- () => value
+
+This in arrow function  is the object outside the function
+
+
+
+
+
 
 */
 
 "use strict";
+
+
+
 
 (function (){ //start IIFE
 
@@ -43,13 +64,16 @@ Immediately Invoked Function Expression IIFE
 
 $(function(){
 
+
+    
+
     //Work because js is doing hiosting 
     console.log(a);
     var a = "111";
     console.log(a);
 
     const buttonHello = document.getElementById("btn4");
-    buttonHello.addEventListener("click",function(){
+    buttonHello.addEventListener("click", () => {
     //const num = parseInt(prompt("Please enter number"));
     //const num = parseFloat(prompt("Please enter number"));
     //const num = Number(prompt("Please enter number"));
@@ -57,8 +81,17 @@ $(function(){
     alert(Math.pow(num, 2));
     });
 
+
+
  
 })
+
+const btn5 = document.getElementById("btn5");
+
+btn5.addEventListener("click", () => alert("btn5"));
+
+
+
 
 
 //Using JavaScript 
