@@ -3,7 +3,9 @@
 
 /*
 
-example from lesson
+example from lesson:
+
+example 1:
 
 if we want to display all item in array we use - "of"
 
@@ -18,3 +20,18 @@ for(const item of array){
 }
 
 */
+
+
+//Using JavaScript 
+const buttonHello = document.getElementById("buttonHello");
+buttonHello.addEventListener("click",showHello);
+
+function showHello(){
+    alert("Hello");
+}
+
+//Using JQuery
+$("#buttonWhatsUp").click(function() {
+    var dt = new Date();
+    alert(dt.toString());
+})
