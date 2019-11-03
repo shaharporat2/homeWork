@@ -19,7 +19,35 @@ for(const item of array){
     }
 }
 
+
+Uses of JQuery
+$(<Selector>) - search for css selector (class(.) , id(#) , <buttom> - html tag)
+$(<Object>) - search for object 
+$(function) - function will be executed on load 
+
+let is not doing hoisting an is known only in the code block (Block scope variable)
+
+Immediately Invoked Function Expression IIFE
+
+
+
 */
+
+(function (){ //start IIFE
+    var x = 123;
+    function f(){
+        console.log("f...");
+    }
+    f();
+})() //End IIFE
+
+$(function(){
+
+    //Work because js is doing hiosting 
+    console.log(a);
+    var a = "111";
+    console.log(a);
+})
 
 
 //Using JavaScript 
@@ -39,9 +67,13 @@ $("#buttonWhatsUp").click(function() {
 })
 
 $("button").mouseover( function(){
-    $(this).css("background-color","blue")
+    if(this.id.includes("btn")){
+        $(this).css("background-color","blue");
+    }
 })
 
 $("button").mouseout( function(){
-    $(this).css("background-color","green")
+    if(this.id.includes("btn")){
+        $(this).css("background-color","green");
+    }
 })
