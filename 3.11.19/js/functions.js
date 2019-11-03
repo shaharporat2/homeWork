@@ -29,16 +29,17 @@ let is not doing hoisting an is known only in the code block (Block scope variab
 
 Immediately Invoked Function Expression IIFE
 
+"use strict" - Set JavaScript -  find all kinds of Bugs in javaScript 
+
 
 
 */
 
+"use strict";
+
 (function (){ //start IIFE
-    var x = 123;
-    function f(){
-        console.log("f...");
-    }
-    f();
+    let num = prompt("Please enter number");
+    alert(Math.pow(num, 2));
 })() //End IIFE
 
 $(function(){
