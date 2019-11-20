@@ -1,5 +1,10 @@
 "use strict";
 exports.__esModule = true;
-var toaster_1 = require("./toaster");
-var t = new toaster_1.Toaster("A", 12, "B", "C", 12);
-t.display();
+var Rectangle_1 = require("./Rectangle");
+var Circle_1 = require("./Circle");
+var r = new Rectangle_1.Rectangle(1, 1, "red", 12, 13);
+var c = new Circle_1.Circle(2, 2, "Blue", 5);
+r.dispay();
+console.log("Rectangle Area: " + r.getArea());
+c.dispay();
+console.log("Circle Area: " + c.getArea());

@@ -13,21 +13,23 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
-var ElectronicProduct_1 = require("./ElectronicProduct");
-var Toaster = /** @class */ (function (_super) {
-    __extends(Toaster, _super);
-    function Toaster(name, price, manufacturer, model, optimalHeat) {
-        var _this = _super.call(this, name, price, manufacturer, model) || this;
-        _this._optimalHeat = optimalHeat;
+var Shape_1 = require("./Shape");
+var Rectangle = /** @class */ (function (_super) {
+    __extends(Rectangle, _super);
+    function Rectangle(xPos, yPos, color, width, height) {
+        var _this = _super.call(this, xPos, yPos, color) || this;
+        _this._height = height;
+        _this._width = width;
         return _this;
     }
-    Toaster.prototype.display = function () {
-        _super.prototype.display.call(this);
-        console.log("optimal heat: " + this._optimalHeat);
+    Rectangle.prototype.dispay = function () {
+        _super.prototype.dispay.call(this);
+        console.log("width: " + this._width);
+        console.log("height: " + this._height);
     };
-    Toaster.prototype.doWork = function () {
-        console.log("Toasting...");
+    Rectangle.prototype.getArea = function () {
+        return (this._width * this._height) / 2;
     };
-    return Toaster;
-}(ElectronicProduct_1.ElectronicProduct));
-exports.Toaster = Toaster;
+    return Rectangle;
+}(Shape_1.Shape));
+exports.Rectangle = Rectangle;

@@ -1,5 +1,13 @@
-import { Toaster } from "./toaster"
+import { Rectangle } from "./Rectangle"
+import { Circle } from "./Circle"
 
-let t = new Toaster("A",12,"B","C",12);
 
-t.display();
+let r = new Rectangle(1,1,"red",12,13);
+
+let c = new Circle(2,2,"Blue",5);
+
+
+r.dispay();
+console.log("Rectangle Area: " + r.getArea());
+c.dispay();
+console.log("Circle Area: " + c.getArea());

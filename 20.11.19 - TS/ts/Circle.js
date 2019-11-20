@@ -13,21 +13,21 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
-var ElectronicProduct_1 = require("./ElectronicProduct");
-var Toaster = /** @class */ (function (_super) {
-    __extends(Toaster, _super);
-    function Toaster(name, price, manufacturer, model, optimalHeat) {
-        var _this = _super.call(this, name, price, manufacturer, model) || this;
-        _this._optimalHeat = optimalHeat;
+var Shape_1 = require("./Shape");
+var Circle = /** @class */ (function (_super) {
+    __extends(Circle, _super);
+    function Circle(xPos, yPos, color, radius) {
+        var _this = _super.call(this, xPos, yPos, color) || this;
+        _this._radius = radius;
         return _this;
     }
-    Toaster.prototype.display = function () {
-        _super.prototype.display.call(this);
-        console.log("optimal heat: " + this._optimalHeat);
+    Circle.prototype.dispay = function () {
+        _super.prototype.dispay.call(this);
+        console.log("radius: " + this._radius);
     };
-    Toaster.prototype.doWork = function () {
-        console.log("Toasting...");
+    Circle.prototype.getArea = function () {
+        return (this._radius) * Math.PI;
     };
-    return Toaster;
-}(ElectronicProduct_1.ElectronicProduct));
-exports.Toaster = Toaster;
+    return Circle;
+}(Shape_1.Shape));
+exports.Circle = Circle;

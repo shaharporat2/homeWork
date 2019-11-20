@@ -12,4 +12,8 @@ export class Toaster extends ElectronicProduct{
         super.display();
         console.log("optimal heat: " + this._optimalHeat);
     }
+
+    public doWork(){
+        console.log("Toasting...");
+    }
 }
