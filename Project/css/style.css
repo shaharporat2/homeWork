@@ -1,0 +1,21 @@
+.header{
+    background-color: lightgrey;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    padding-bottom: 20px;
+    border-bottom: black;
+    border-width: 2px;
+}
+
+
+/*
+.nav-link:hover{
+    background-color: blue;
+    color: white;
+}
+*/
+
+.nav-link{
+    color: blue;
+}
+

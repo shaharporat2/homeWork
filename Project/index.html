@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="header col-lg-12 pt-1" style="border-bottom: 1px solid black ;">
+                <h1> Cryptinite </h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="allCoins" class="row">
+            <nav class="navbar navbar-expand-lg navbar-light col-xl-12">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="nav nav-pills mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link btn btn-primary" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Live Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
+            <div id="loader">
+                <img src="./img/ajax-loader.gif" class="img-responsive"/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="./js/functions.js"> </script>
