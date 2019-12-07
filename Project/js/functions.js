@@ -33,7 +33,14 @@ function display(coins){
                         </div>
                         <h5 class="card-text pb-3">${coin.symbol}</h5>
                         <h6 class="card-subtitle text-muted pb-3">${coin.name}</h6>
-                        <a href="#" class="btn btn-primary">Button</a>
+                        <p>
+                            <a data-toggle="collapse" href="#collapse${coin.id}" role="button" aria-expanded="false" aria-controls="collaps${coin.id}" class="btn btn-primary">More Info</a>
+                        </p>
+                        <div class="collapse" id="collapse${coin.id}">
+                            <div class="card card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            </div>
+                        </div>
                     </article>
                 </div>
             </div>
