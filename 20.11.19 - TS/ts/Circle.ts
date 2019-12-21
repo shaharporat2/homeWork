@@ -9,12 +9,12 @@ export class Circle extends Shape{
         this._radius= radius;
     }
 
-    dispay(){
+    public dispay(){
         super.dispay();
         console.log("radius: " + this._radius);
     }
 
-    getArea() : number{
+    public getArea() : number{
         return (this._radius) * Math.PI;
     }
 }

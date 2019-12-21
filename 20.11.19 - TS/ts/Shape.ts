@@ -10,11 +10,11 @@ export abstract class Shape {
         this._color = color;
     }
 
-    dispay () : void{
+    public dispay () : void{
         console.log("xPos: " + this._xPos);
         console.log("yPos: " + this._yPos);
         console.log("color: " + this._color);
     }
 
-    abstract getArea() : number;
+    public abstract getArea() : number;
 }

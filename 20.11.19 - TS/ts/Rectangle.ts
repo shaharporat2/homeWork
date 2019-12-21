@@ -11,13 +11,13 @@ export class Rectangle extends Shape{
         this._width= width;
     }
 
-    dispay(){
+    public dispay(){
         super.dispay();
         console.log("width: " + this._width);
         console.log("height: " + this._height);
     }
 
-    getArea() : number{
+    public  getArea() : number{
         return (this._width * this._height) / 2;
     }
 }

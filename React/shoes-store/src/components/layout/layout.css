@@ -1,0 +1,29 @@
+.layout > *{
+    border: 1px solid black;
+    box-sizing: border-box;
+
+}
+
+.layout{
+    height: 100%;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.layout > header{
+    height: 15%;
+    background-color: lightcoral;
+
+}
+
+.layout > main{
+    height: 80%;
+    background-color: lightsalmon;
+
+}
+
+.layout > footer{
+    height: 5%;
+    background-color: lightseagreen;
+
+}

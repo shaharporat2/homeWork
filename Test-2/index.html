@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-6 col-sm-6 col-md-d" >
+                <button id="all" type="button" class="btn btn-primary">Get all</button>
+                <div class="input-group w-50">
+                    <input id="searchCountryInput" type="text" class="form-control" placeholder="Search" name="search">
+                    <div class="input-group-btn">
+                        <button id="searchCountry" class="btn btn-default" type="submit"> Search </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loader">
+            <img src="./img/ajax-loader.gif" style="display: none;"/>
+        </div>
+        <div id="allCountries" class="row">
+
+        </div>
+    </div>
+</body>
+</html>
+<script src="./js/functions.js"> </script>
+
