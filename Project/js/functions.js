@@ -272,9 +272,9 @@ var time = new Date;
 var updateInterval = 2000;
 var chrtInterval;
 
-var yValue1 = 800;
-var yValue2 = 810;
-var yValue3 = 780;
+var yValue1 = 0;
+var yValue2 = 0;
+var yValue3 = 0;
 
     
 
