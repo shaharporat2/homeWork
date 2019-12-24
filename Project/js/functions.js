@@ -1,5 +1,8 @@
 /// <reference path="jquery-3.4.1.js" />
 
+var localCoins;
+
+
 $(() => {
 
 
@@ -20,6 +23,7 @@ $(() => {
             },
             error: err => alert("Error" + err.status),
             success: response => {
+                localCoins = response;
                 display(response)
             }
         })
@@ -31,12 +35,32 @@ $(() => {
 
     $(document).on("click", "#liveReport", displayLiveReport);
 
+    $(document).on("click", "#searchCoins", searchCoins);
+
+
 });
 
 
+function searchCoins(){
+
+    if(localCoins === undefined ){
+        alert("No coins in the memory, please load coins using home button first");
+    }else{
+        var list = [];
+    
+        var value = $("#searchCoinsInput").val() ;
+        for (coin of localCoins){
+            if(value.localeCompare(coin.id) === 0 || value.localeCompare(coin.symbol) === 0 || value.localeCompare(coin.name) === 0){
+                list.push(coin);
+            }
+        }
+        display(list)
+    }
+}
+
 
 function display(coins) {
-
+    $("#allCoins").empty();
     for (coin of coins) {
         const card = `
             <div class="col-xl-4 p-0">
@@ -66,7 +90,6 @@ function display(coins) {
         $("#allCoins").append(card);
     }
     $(".custom-control-input").change(appendToReport);
-    //$(document).on("click",".custom-control-input",appendToReport);
 
     let item
     let list = JSON.parse(localStorage.getItem("reportList"));
