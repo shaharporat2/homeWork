@@ -42,18 +42,31 @@ $(() => {
 
 
 function searchCoins(){
+    
+    var list = [];
+    var displayCoins = []
 
     if(localCoins === undefined ){
         alert("No coins in the memory, please load coins using home button first");
     }else{
-        var list = [];
-    
+
+        
         var value = $("#searchCoinsInput").val() ;
+
+        if (value === ""){
+            tmepCoins = JSON.parse(localStorage.getItem("reportList"));
+            for(name of tmepCoins){
+                displayCoins.push(name);
+            }
+        }else{
+            displayCoins.push(value)
+        }
         for (coin of localCoins){
-            if(value.localeCompare(coin.id) === 0 || value.localeCompare(coin.symbol) === 0 || value.localeCompare(coin.name) === 0){
+            if(displayCoins.includes(coin.id) === true || displayCoins.includes(coin.symbol) === true || displayCoins.includes(coin.name) === true){
                 list.push(coin);
             }
         }
+
         display(list)
     }
 }
@@ -260,8 +273,14 @@ function displayAbout() {
 
     const about = `
     
-        <h1> shahar </h1>
+    <div class="col-xl-12" id="chartContainer"  style="height: 300px; width: 100%;">
+        <h1> Name: Shahar Porat </h1>
+        <br>
+        <h2> Best cryptocurrency website ever </h3>
+        <img src="./img/The-Top-3-Cryptocurrencies-What-Makes-Them-a-Success.jpg"/>
+    </div>    
     `
+  
 
     $("#allCoins").append(about);
 
@@ -379,7 +398,7 @@ function displayLiveReport() {
         count = count || 1;
 
         
-        //var deltaY1, deltaY2, deltaY3;
+        
         for (var i = 0; i < count; i++) {
             time.setTime(time.getTime() + updateInterval);
             fetch(url)
@@ -394,34 +413,8 @@ function displayLiveReport() {
                     i++;
                 }
             })
-            // deltaY1 = -1 + Math.random() * (1 + 1);
-            // deltaY2 = -1 + Math.random() * (1 + 1);
-            // deltaY3 = -1 + Math.random() * (1 + 1);
-    
-            // // adding random value and rounding it to two digits. 
-            // yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
-            // yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
-            // yValue3 = Math.round((yValue3 + deltaY3) * 100) / 100;
-    
-            // // pushing the new values
-            // dataPoints[1].push({
-            //     x: time.getTime(),
-            //     y: yValue1
-            // });
-            // dataPoints[2].push({
-            //     x: time.getTime(),
-            //     y: yValue2
-            // });
-            // dataPoints[3].push({
-            //     x: time.getTime(),
-            //     y: yValue3
-            // });
         }
-    
-        // updating legend text with  updated with y Value 
-        //options.data[0].legendText = "Turbine 1 : " + yValue1 + "Wh";
-        //options.data[1].legendText = "Turbine 2 : " + yValue2 + "Wh";
-        //options.data[2].legendText = "Turbine 3 : " + yValue3 + "Wh";
+
         $("#chartContainer").CanvasJSChart().render();
     }
 }
