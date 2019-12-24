@@ -277,7 +277,7 @@ function displayAbout() {
         <h1> Name: Shahar Porat </h1>
         <br>
         <h2> Best cryptocurrency website ever </h3>
-        <img src="./img/The-Top-3-Cryptocurrencies-What-Makes-Them-a-Success.jpg"/>
+        <img class="img-thumbnail" src="./img/The-Top-3-Cryptocurrencies-What-Makes-Them-a-Success.jpg"/>
     </div>    
     `
   
