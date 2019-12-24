@@ -6,6 +6,7 @@ $(() => {
 
     $("#home").click(() => {
         $("#allCoins").empty();
+        clearInterval(chrtInterval);
 
         $.ajax({
             method: "GET",
@@ -232,6 +233,7 @@ function saveChanges() {
 
 function displayAbout() {
     $("#allCoins").empty();
+    clearInterval(chrtInterval);
 
     const about = `
     
@@ -243,8 +245,32 @@ function displayAbout() {
 }
 
 var chart;
+var time = new Date;
+var updateInterval = 2000;
+var chrtInterval;
+
+var yValue1 = 800;
+var yValue2 = 810;
+var yValue3 = 780;
+
+    
+
 
 function displayLiveReport() {
+
+    var options;
+    var coins = [];
+    var dataPoints1 = [];
+    var dataPoints2 = [];
+    var dataPoints3 = [];
+    var dataPoints4 = [];
+    var dataPoints5 = [];
+    var dataPoints =[];
+    dataPoints.push(dataPoints1);
+    dataPoints.push(dataPoints2);
+    dataPoints.push(dataPoints3);
+    dataPoints.push(dataPoints4);
+    dataPoints.push(dataPoints5);
 
     url =""
 
@@ -261,94 +287,60 @@ function displayLiveReport() {
     fetch(url)
     .then((resp) => resp.json())
     .then(function(data){
-        console.log(data);
+        var i=1;
+        for(coin in data){
+            var el = {
+                type: "line",
+                xValueType: "dateTime",
+                xValueFormatString: "hh:mm:ss TT",
+                showInLegend: true,
+                name: coin,
+                dataPoints: dataPoints[i]
+            }
+            coins.push(el); 
+            i++;
+        }
+        var options = {
+            title: {
+                text: "Coin Chart"
+            },
+            axisX: {
+                title: "chart updates every 2 secs"
+            },
+            axisY: {
+                includeZero: false
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                fontSize: 22,
+                fontColor: "dimGrey",
+                itemclick: toggleDataSeries
+            },
+            data:[
+
+            ]
+        };        
+        options.data = coins;
+    
+        const chartArea = `
+        <div class="col-xl-12" id="chartContainer"  style="height: 300px; width: 100%;">
+        
+        </div>    
+        ` 
+    
+        $("#allCoins").empty();
+        $("#allCoins").append(chartArea);
+        chart = $("#chartContainer").CanvasJSChart(options);
+        updateChart(100);
+        chrtInterval = setInterval(function () { updateChart() }, updateInterval);
     })
     .catch(err => alert(err.message))
 
 
-
-
-
-    var options;
-    var dataPoints1 = [];
-    var dataPoints2 = [];
-    var dataPoints3 = [];
-    
-    var options = {
-        title: {
-            text: "Coin Chart"
-        },
-        axisX: {
-            title: "chart updates every 2 secs"
-        },
-        axisY: {
-            suffix: "Wh",
-            includeZero: false
-        },
-        toolTip: {
-            shared: true
-        },
-        legend: {
-            cursor: "pointer",
-            verticalAlign: "top",
-            fontSize: 22,
-            fontColor: "dimGrey",
-            itemclick: toggleDataSeries
-        },
-        data: [{
-            type: "line",
-            xValueType: "dateTime",
-            yValueFormatString: "###.00Wh",
-            xValueFormatString: "hh:mm:ss TT",
-            showInLegend: true,
-            name: "Turbine 1",
-            dataPoints: dataPoints1
-        },
-        {
-            type: "line",
-            xValueType: "dateTime",
-            yValueFormatString: "###.00Wh",
-            showInLegend: true,
-            name: "Turbine 2",
-            dataPoints: dataPoints2
-        }, {
-            type: "line",
-            xValueType: "dateTime",
-            yValueFormatString: "###.00Wh",
-            showInLegend: true,
-            name: "Turbine 2",
-            dataPoints: dataPoints3
-        }]
-    };
-    
-    
-    var updateInterval = 2000;
-    // initial value
-    var yValue1 = 800;
-    var yValue2 = 810;
-    var yValue3 = 780;
-
-    var time = new Date;
-
-
-    
-    //starting at 10.00 am
-    time.setHours(10);
-    time.setMinutes(00);
-    time.setSeconds(00);
-    time.setMilliseconds(00);
-
-    const chartArea = `
-    <div class="col-xl-12" id="chartContainer"  style="height: 300px; width: 100%;">
-    
-    </div>    
-    ` 
-
-    $("#allCoins").empty();
-    $("#allCoins").append(chartArea);
-    chart = $("#chartContainer").CanvasJSChart(options);
-    updateChart(100);
-    setInterval(function () { updateChart() }, updateInterval);
 
     function toggleDataSeries(e) {
         if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -362,37 +354,51 @@ function displayLiveReport() {
 
     function updateChart(count) {
         count = count || 1;
-        var deltaY1, deltaY2, deltaY3;
+
+        
+        //var deltaY1, deltaY2, deltaY3;
         for (var i = 0; i < count; i++) {
             time.setTime(time.getTime() + updateInterval);
-            deltaY1 = -1 + Math.random() * (1 + 1);
-            deltaY2 = -1 + Math.random() * (1 + 1);
-            deltaY3 = -1 + Math.random() * (1 + 1);
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data){
+                var i=1;
+                for(coin in data){
+                    dataPoints[i].push({
+                        x: time.getTime(),
+                        y: data[coin].USD
+                    });
+                    i++;
+                }
+            })
+            // deltaY1 = -1 + Math.random() * (1 + 1);
+            // deltaY2 = -1 + Math.random() * (1 + 1);
+            // deltaY3 = -1 + Math.random() * (1 + 1);
     
-            // adding random value and rounding it to two digits. 
-            yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
-            yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
-            yValue3 = Math.round((yValue3 + deltaY3) * 100) / 100;
+            // // adding random value and rounding it to two digits. 
+            // yValue1 = Math.round((yValue1 + deltaY1) * 100) / 100;
+            // yValue2 = Math.round((yValue2 + deltaY2) * 100) / 100;
+            // yValue3 = Math.round((yValue3 + deltaY3) * 100) / 100;
     
-            // pushing the new values
-            dataPoints1.push({
-                x: time.getTime(),
-                y: yValue1
-            });
-            dataPoints2.push({
-                x: time.getTime(),
-                y: yValue2
-            });
-            dataPoints3.push({
-                x: time.getTime(),
-                y: yValue3
-            });
+            // // pushing the new values
+            // dataPoints[1].push({
+            //     x: time.getTime(),
+            //     y: yValue1
+            // });
+            // dataPoints[2].push({
+            //     x: time.getTime(),
+            //     y: yValue2
+            // });
+            // dataPoints[3].push({
+            //     x: time.getTime(),
+            //     y: yValue3
+            // });
         }
     
         // updating legend text with  updated with y Value 
-        options.data[0].legendText = "Turbine 1 : " + yValue1 + "Wh";
-        options.data[1].legendText = "Turbine 2 : " + yValue2 + "Wh";
-        options.data[2].legendText = "Turbine 3 : " + yValue3 + "Wh";
+        //options.data[0].legendText = "Turbine 1 : " + yValue1 + "Wh";
+        //options.data[1].legendText = "Turbine 2 : " + yValue2 + "Wh";
+        //options.data[2].legendText = "Turbine 3 : " + yValue3 + "Wh";
         $("#chartContainer").CanvasJSChart().render();
     }
 }
