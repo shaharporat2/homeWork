@@ -78,6 +78,10 @@ function searchCoins(){
 
 /**
  * 
+ * This function displays the coins given as parameter
+ * 
+ * including affecting the toggole to check position if appers in report list
+ * 
  * @param {*} coins 
  */
 
@@ -124,6 +128,9 @@ function display(coins) {
 
 /**
  * 
+ * This function handle get more information for specific coin
+ * 
+ * the function get the information from the api or from local storage
  * 
  */
 function getInfo() {
@@ -159,6 +166,8 @@ function getInfo() {
 
 /**
  * 
+ * This function adding coin detail to local storage
+ * 
  * @param {*} info 
  */
 function addToLocalStorage(info) {
@@ -176,7 +185,7 @@ function addToLocalStorage(info) {
 }
 
 /**
- * 
+ * This function add the infornmation to the DOM
  * @param {*} id 
  */
 function addInfo(id) {
@@ -197,7 +206,7 @@ function addInfo(id) {
 }
 
 /**
- * 
+ * This functio appends  coin to report list , if more then 5 - poping the Modal
  * 
  */
 function appendToReport() {
@@ -227,7 +236,7 @@ function appendToReport() {
 
 /**
  * 
- * 
+ * This function poping the Modal
  */
 function viewModal() {
 
@@ -279,6 +288,7 @@ function viewModal() {
 
 /**
  * 
+ * This function save the changes from the modal form
  * 
  */
 
@@ -303,6 +313,11 @@ function saveChanges() {
 
 }
 
+
+/**
+ * 
+ * This function displays the about page
+ */
 function displayAbout() {
     $("#allCoins").empty();
     clearInterval(chrtInterval);
@@ -334,6 +349,7 @@ var yValue3 = 0;
     
 /**
  * 
+ * This function displays the report list using CanvasJS
  * 
  */
 
@@ -424,7 +440,7 @@ function displayLiveReport() {
 
 
 /**
- * 
+ * Inner function for CanvasJS 
  * @param {*} e 
  */
 
@@ -440,7 +456,7 @@ function toggleDataSeries(e) {
 
 
 /**
- * 
+ * This function updates thr ChartJS
  * @param {*} count 
  */
 function updateChart(count) {
