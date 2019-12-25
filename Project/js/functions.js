@@ -40,8 +40,13 @@ $(() => {
 
 });
 
-
+/**
+ * 
+ */
 function searchCoins(){
+
+    clearInterval(chrtInterval);
+
     
     var list = [];
     var displayCoins = []
@@ -71,6 +76,10 @@ function searchCoins(){
     }
 }
 
+/**
+ * 
+ * @param {*} coins 
+ */
 
 function display(coins) {
     $("#allCoins").empty();
@@ -113,11 +122,19 @@ function display(coins) {
     }
 }
 
+/**
+ * 
+ * 
+ */
 function getInfo() {
     id = (($(this).attr("class")).split(" "))[3];
-    coinObj = localStorage.getItem(id);
+    coinObj = JSON.parse(localStorage.getItem(id));
 
-    if ((coinObj === null) || (parseInt(coinObj.time) + parseInt(120000) < Date.now())) {
+    if(coinObj != null){
+        var update  = parseInt(coinObj.time) + parseInt(120000) - Date.now();
+    }
+
+    if ((coinObj === null) || (update < 0 )) {
         $.ajax({
             method: "GET",
             url: "https://api.coingecko.com/api/v3/coins/" + id,
@@ -139,6 +156,11 @@ function getInfo() {
     }
 }
 
+
+/**
+ * 
+ * @param {*} info 
+ */
 function addToLocalStorage(info) {
 
 
@@ -146,14 +168,17 @@ function addToLocalStorage(info) {
         "usd": info.market_data.current_price.usd,
         "eur": info.market_data.current_price.eur,
         "ils": info.market_data.current_price.ils,
-        "symbol": info.image.thumb,
+        "symbol": info.image.large,
         "time": Date.now()
     }
     localStorage.removeItem(info.id);
     localStorage.setItem(info.id, JSON.stringify(data));
 }
 
-
+/**
+ * 
+ * @param {*} id 
+ */
 function addInfo(id) {
 
     info = JSON.parse(localStorage.getItem(id));
@@ -165,13 +190,16 @@ function addInfo(id) {
         <br>
         Value in ILS: ${info.ils}&#8362
         <br>
-        <img class="img-thumbnail" src="${info.symbol}"/>
+        <img  src="${info.symbol}"/>
     `
     $(".infoBody" + id).empty();
     $(".infoBody" + id).append(infoCard);
 }
 
-
+/**
+ * 
+ * 
+ */
 function appendToReport() {
 
     if (localStorage.getItem("reportList") === null) {
@@ -182,7 +210,6 @@ function appendToReport() {
     list = JSON.parse(localStorage.getItem("reportList"));
 
     id = $(this).attr("id");
-    console.log(id);
 
     index = list.indexOf(id);
     if (index > -1) {
@@ -197,6 +224,11 @@ function appendToReport() {
     localStorage.setItem("reportList", JSON.stringify(list));
 }
 
+
+/**
+ * 
+ * 
+ */
 function viewModal() {
 
     list = JSON.parse(localStorage.getItem("reportList"));
@@ -245,12 +277,16 @@ function viewModal() {
     localStorage.setItem("tempCoin", id);
 }
 
+/**
+ * 
+ * 
+ */
+
 function saveChanges() {
     radioList = $(".modalOptions");
     for (item of radioList) {
         if (item.checked == true) {
             index = list.indexOf(item.value);
-            console.log(item.value);
             if (index > -1) {
                 list.splice(index, 1);
                 $("#" + item.value).prop('checked', false);
@@ -273,7 +309,7 @@ function displayAbout() {
 
     const about = `
     
-    <div class="col-xl-12" id="chartContainer"  style="height: 300px; width: 100%;">
+    <div class="col-xl-12" id="AboutPage"  style="height: 300px; width: 100%;">
         <h1> Name: Shahar Porat </h1>
         <br>
         <h2> Best cryptocurrency website ever </h3>
@@ -296,7 +332,10 @@ var yValue2 = 0;
 var yValue3 = 0;
 
     
-
+/**
+ * 
+ * 
+ */
 
 function displayLiveReport() {
 
@@ -342,7 +381,8 @@ function displayLiveReport() {
             coins.push(el); 
             i++;
         }
-        var options = {
+         
+        options = {
             title: {
                 text: "Coin Chart"
             },
@@ -383,40 +423,49 @@ function displayLiveReport() {
     .catch(err => alert(err.message))
 
 
+/**
+ * 
+ * @param {*} e 
+ */
 
-    function toggleDataSeries(e) {
-        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-        }
-        else {
-            e.dataSeries.visible = true;
-        }
-        e.chart.render();
+function toggleDataSeries(e) {
+    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    }
+    else {
+        e.dataSeries.visible = true;
+    }
+    e.chart.render();
+}
+
+
+/**
+ * 
+ * @param {*} count 
+ */
+function updateChart(count) {
+    count = count || 1;
+
+    
+    
+    for (var i = 0; i < count; i++) {
+        time.setTime(time.getTime() + updateInterval);
+        fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data){
+            var i=1;
+            for(coin in data){
+                dataPoints[i].push({
+                    x: time.getTime(),
+                    y: data[coin].USD
+                });
+                i++;
+            }
+        })
     }
 
-    function updateChart(count) {
-        count = count || 1;
-
-        
-        
-        for (var i = 0; i < count; i++) {
-            time.setTime(time.getTime() + updateInterval);
-            fetch(url)
-            .then((resp) => resp.json())
-            .then(function(data){
-                var i=1;
-                for(coin in data){
-                    dataPoints[i].push({
-                        x: time.getTime(),
-                        y: data[coin].USD
-                    });
-                    i++;
-                }
-            })
-        }
-
-        $("#chartContainer").CanvasJSChart().render();
-    }
+    $("#chartContainer").CanvasJSChart().render();
+}
 }
 
 
